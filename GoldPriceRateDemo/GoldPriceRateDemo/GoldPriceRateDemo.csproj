@@ -57,7 +57,9 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Data\AnnualGoldExchangeData.csv" />
+	  <None Remove="Resources\Images\downarrow.png" />
 	  <None Remove="Resources\Images\goldicon.png" />
+	  <None Remove="Resources\Images\upArrow.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -68,8 +70,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="Syncfusion.Maui.Charts" Version="*" />
-		<PackageReference Include="Syncfusion.Maui.Inputs" Version="*" />
+		<PackageReference Include="Syncfusion.Maui.Toolkit" Version="*" />
 	</ItemGroup>
 
 </Project>

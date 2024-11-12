@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
-             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Toolkit.Charts;assembly=Syncfusion.Maui.Toolkit"
              xmlns:local="clr-namespace:GoldPriceRateDemo"
-             x:Class="GoldPriceRateDemo.MainPage"
-             Background="Black">
+             x:Class="GoldPriceRateDemo.MainPage">
 
     <ContentPage.BindingContext>
         <local:ViewModel/>
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
-        <Border Stroke="#e8ebe0" 
+        <Border Stroke="Black" 
                 StrokeThickness="4"
                 StrokeShape="{OnPlatform Default= RoundRectangle 40, Android= RoundRectangle 35}"
                 Margin="{OnPlatform Default=30, Android= 10}">
@@ -24,39 +22,30 @@
                         <Image Grid.Column="0" Grid.RowSpan="2" Source="goldicon.png"
                                    HeightRequest="55"
                                    WidthRequest="55"
-                                   Margin="15,5,0,0" />
+                                   Margin="15,3,0,0"
+                                   VerticalOptions="Start"/>
                         
                             <Label Grid.Row="0" Grid.Column="1" Text="Tracking Annual Gold Price Fluctuations by Percentage Across Major Global Currencies"
-                                       TextColor="White"
+                                       TextColor="Black"
                                        HorizontalOptions="Start"
                                        FontSize="18"
                                        FontAttributes="Bold"
                                        Margin="5,5,0,0"/>
                         <HorizontalStackLayout  Grid.Row="1" Grid.Column="1" >
                             <Label Text="Annual percentage changes in gold prices from 2009 to 2023, compared across major global currencies."
-                                       TextColor="White"
+                                       TextColor="Black"
                                        HorizontalOptions="Start"
                                        FontSize="12"
-                                       Margin="5,5,0,0"/>
+                                       Margin="5,6,0,0"/>
 
-                            <Label Text="Choose Currency" TextColor="White"
+                            <Label Text="Choose Currency" TextColor="Black"
                                    FontSize="14" Margin="{OnPlatform Default='180,0,5,0', Android='10,0,5,0', iOS='140,0,5,0'}"
                                    VerticalOptions="Center"/>
 
-                            <editors:SfComboBox x:Name="comboBox" WidthRequest="{OnPlatform Default=200, Android=130, iOS=100}"
+                            <Picker x:Name="picker" WidthRequest="{OnPlatform Default=200, Android=130, iOS=100}"
                                                 ItemsSource="{Binding CurrencyName}"
-                                                SelectedIndex="0"
-                                                SelectionChanged="SfComboBox_SelectionChanged"
-                                                Background="Black"
-                                                TextColor="White"
-                                                MaxDropDownHeight="150"
-                                                DropDownBackground="Black"
-                                                DropDownItemTextColor="White"
-                                                DropDownIconColor="White"
-                                                ClearButtonIconColor="Black"
-                                                Stroke="White">
-  
-                            </editors:SfComboBox>
+                                                SelectedItem="{Binding SelectedCurrency}"
+                                                SelectedIndexChanged="picker_SelectedIndexChanged"/>
                         </HorizontalStackLayout>
                     </Grid>
                 </chart:SfCartesianChart.Title>
@@ -64,37 +53,50 @@
             <chart:SfCartesianChart.XAxes>
                 <chart:DateTimeAxis ShowMajorGridLines="False">
                     <chart:DateTimeAxis.Title>
-                     <chart:ChartAxisTitle Text="Year" TextColor="White" />
+                     <chart:ChartAxisTitle Text="Year"/>
                     </chart:DateTimeAxis.Title>
                         <chart:DateTimeAxis.LabelStyle>
-                            <chart:ChartAxisLabelStyle LabelFormat="yyyy"
-                                                       TextColor="White"/>
+                            <chart:ChartAxisLabelStyle LabelFormat="yyyy"/>
                         </chart:DateTimeAxis.LabelStyle>
                     </chart:DateTimeAxis>
             </chart:SfCartesianChart.XAxes>
 
                 <chart:SfCartesianChart.YAxes>
-                    <chart:NumericalAxis ShowMajorGridLines="False" Minimum="-40">
+                    <chart:NumericalAxis ShowMajorGridLines="False" Minimum="-40" Maximum="40">
                         <chart:NumericalAxis.Title>
-                            <chart:ChartAxisTitle Text="% Annual Exchange Rate" TextColor="White" />
+                            <chart:ChartAxisTitle Text="% Annual Exchange Rate"/>
                         </chart:NumericalAxis.Title>
                         <chart:NumericalAxis.LabelStyle>
-                            <chart:ChartAxisLabelStyle TextColor="White"/>
+                            <chart:ChartAxisLabelStyle/>
                         </chart:NumericalAxis.LabelStyle>
                     </chart:NumericalAxis>
                 </chart:SfCartesianChart.YAxes>
 
                 <chart:SfCartesianChart.Annotations>
-                    <chart:HorizontalLineAnnotation Text="Highest Annual Growth" Y1="20" Stroke="White" StrokeDashArray="4,2,4">
+                    <chart:HorizontalLineAnnotation Text="Highest Annual Growth" Y1="20" Stroke="#62825D" StrokeWidth="2" StrokeDashArray="4,2,4">
                         <chart:HorizontalLineAnnotation.LabelStyle>
-                            <chart:ChartAnnotationLabelStyle TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Start"/>
+                            <chart:ChartAnnotationLabelStyle TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="Start"
+                                                             FontSize="13"/>
                         </chart:HorizontalLineAnnotation.LabelStyle>
                     </chart:HorizontalLineAnnotation>
-                    <chart:HorizontalLineAnnotation Text="Lowest Annual Growth" Y1="-25" Stroke="White" StrokeDashArray="4,2,4">
+                    <chart:HorizontalLineAnnotation Text="Lowest Annual Growth" Y1="-25" Stroke="#b30000" StrokeWidth="2" StrokeDashArray="4,2,4">
                         <chart:HorizontalLineAnnotation.LabelStyle>
-                            <chart:ChartAnnotationLabelStyle TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="End"/>
+                            <chart:ChartAnnotationLabelStyle TextColor="Black" HorizontalTextAlignment="End" VerticalTextAlignment="End"
+                                                             FontSize="13"/>
                         </chart:HorizontalLineAnnotation.LabelStyle>
                     </chart:HorizontalLineAnnotation>
+
+                    <chart:ViewAnnotation X1="2021-03-01" Y1="23" CoordinateUnit="Axis">
+                        <chart:ViewAnnotation.View>
+                            <Image Source="uparrow.png" HeightRequest="28" WidthRequest="28" />
+                        </chart:ViewAnnotation.View>
+                    </chart:ViewAnnotation>
+
+                    <chart:ViewAnnotation X1="2021-03-08" Y1="-27" CoordinateUnit="Axis">
+                        <chart:ViewAnnotation.View>
+                            <Image Source="downarrow.png" HeightRequest="28" WidthRequest="28"/>
+                        </chart:ViewAnnotation.View>
+                    </chart:ViewAnnotation>
                 </chart:SfCartesianChart.Annotations>
 
                 <chart:SplineAreaSeries x:Name="series" ItemsSource="{Binding GoldPriceRate}"
@@ -103,7 +105,7 @@
                                         EnableTooltip="True"
                                         ShowDataLabels="False"
                                         Fill="#FAB12F"
-                                        Opacity="0.8">
+                                        Opacity="0.9">
                 </chart:SplineAreaSeries>
 
         </chart:SfCartesianChart>
@@ -111,6 +113,7 @@
     </ContentPage.Content>
    
 </ContentPage>
+
 
 
 

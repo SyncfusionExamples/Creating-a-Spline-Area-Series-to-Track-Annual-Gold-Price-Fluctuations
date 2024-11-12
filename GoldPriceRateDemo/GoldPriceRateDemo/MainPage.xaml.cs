@@ -1,75 +1,76 @@
-﻿
+﻿using System.Globalization;
+
 
 namespace GoldPriceRateDemo
 {
     public partial class MainPage : ContentPage
     {
-        DataTemplate tooltipTemplate;
         public MainPage()
         {
             InitializeComponent();
-            TooltipTemplate("USD");
-            series.TooltipTemplate = tooltipTemplate;
+           series.TooltipTemplate = TooltipTemplate("USD"); ;
         }
 
-        private void SfComboBox_SelectionChanged(object sender, Syncfusion.Maui.Inputs.SelectionChangedEventArgs e)
+        private void picker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedValue = comboBox.SelectedValue.ToString() ?? string.Empty;
+            if(picker ==null || picker.SelectedItem == null)
+                return;
+            var selectedValue = picker.SelectedItem.ToString() ?? string.Empty;
             switch (selectedValue)
             {
                 case "USD":
                     series.YBindingPath = "USD";
-                    TooltipTemplate("USD");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("USD");
                     break;
                 case "AUD":
                     series.YBindingPath = "AUD";
-                    TooltipTemplate("AUD");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("AUD");
                     break;
                 case "CAD":
                     series.YBindingPath = "CAD";
-                    TooltipTemplate("AUD");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("AUD");
                     break;
                 case "CHF":
                     series.YBindingPath = "CHF";
-                    TooltipTemplate("CHF");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("CHF");
                     break;
                 case "CNY":
                     series.YBindingPath = "CNY";
-                    TooltipTemplate("CNY");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("CNY");
                     break;
                 case "EUR":
                     series.YBindingPath = "EUR";
-                    TooltipTemplate("EUR");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("EUR");
                     break;
                 case "GBP":
                     series.YBindingPath = "GBP";
-                    TooltipTemplate("GBP");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("GBP");
                     break;
                 case "INR":
                     series.YBindingPath = "INR";
-                    TooltipTemplate("INR");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("INR");
                     break;
                 case "JPY":
                     series.YBindingPath = "JPY";
-                    TooltipTemplate("JPY");
-                    series.TooltipTemplate = tooltipTemplate;
+                    series.TooltipTemplate = TooltipTemplate("JPY");
                     break;
             }
         }
 
-        private void TooltipTemplate(string currency)
+        private DataTemplate TooltipTemplate(string currency)
         {
-            tooltipTemplate = new DataTemplate(() =>
+            var tooltipTemplate = new DataTemplate(() =>
             {
                 HorizontalStackLayout layout = new HorizontalStackLayout();
+
+                Image trendIcon = new Image()
+                {
+                    HorizontalOptions = LayoutOptions.Center,
+                    VerticalOptions = LayoutOptions.Center,
+                    HeightRequest = 25,
+                    WidthRequest= 25, 
+                };
+                trendIcon.SetBinding(Image.SourceProperty, new Binding($"Item.{currency}", BindingMode.Default, converter: new TrendIconConverter()));
 
                 Label text = new Label()
                 { 
@@ -90,10 +91,34 @@ namespace GoldPriceRateDemo
                 };
                 annualRate.SetBinding(Label.TextProperty, new Binding($"Item.{currency}", BindingMode.Default, null, null, "{0}%"));
 
+                layout.Children.Add(trendIcon);
                 layout.Children.Add(text);
                 layout.Children.Add(annualRate);
                 return layout;
             });
+            return tooltipTemplate;
+        }
+
+        
+    }
+
+    public class TrendIconConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+           if(value is double rate)
+            {
+                if (rate > 0)
+                    return "uparrow.png";
+                else
+                    return "downarrow.png";
+            }
+            return string.Empty;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 

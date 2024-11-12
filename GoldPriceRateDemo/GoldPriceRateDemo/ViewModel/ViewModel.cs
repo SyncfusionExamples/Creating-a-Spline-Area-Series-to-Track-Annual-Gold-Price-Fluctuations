@@ -10,11 +10,13 @@ namespace GoldPriceRateDemo
         public ObservableCollection<Model> GoldPriceRate { get; set; }
 
         public string[] CurrencyName { get; set; }
+        public string SelectedCurrency { get; set; }
         private DateTime year;
         public ViewModel()
         {
             GoldPriceRate = new ObservableCollection<Model>();
             CurrencyName = new string[] { "USD", "AUD", "CAD", "CHF", "CNY", "EUR", "GBP", "INR", "JPY" };
+            SelectedCurrency = "USD";
             ReadCSV();
         }
 
