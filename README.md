@@ -1,5 +1,4 @@
-# Creating-a-Spline-Area-Series-to-Track-Annual-Gold-Price-Fluctuations
-Creating a Spline Area Series to Track Annual Gold Price Fluctuations Across Major Global Currencies
+# Creating a Spline Area Series to Track Annual Gold Price Fluctuations Across Major Global Currencies
 
 In today’s post, we’ll walk you through creating a visually compelling *Spline Area Chart* to track annual gold price fluctuations across major global currencies, using the powerful [Syncfusion .NET MAUI Cartesian Charts control](https://www.syncfusion.com/maui-controls/maui-cartesian-charts). We’ll cover how to enhance your chart’s interactivity and visual appeal by incorporating custom tooltips, threshold lines, and dynamic series updates based on user input.
 
@@ -12,11 +11,12 @@ In today’s post, we’ll walk you through creating a visually compelling *Spli
 ## Combo Box Selection
 To make the chart more interactive, we’ve used the [Syncfusion Combo Box control](https://www.syncfusion.com/maui-controls/maui-combobox) to allow users to select different currencies. Based on the selected currency, the chart’s spline area series is dynamically updated to reflect the gold price fluctuations for that currency. This approach gives users flexibility, enabling them to explore the data for various currencies without needing to refresh the page or reload the chart.
 
-
+![gold rate](https://github.com/user-attachments/assets/47f9a632-b4c4-4f70-b2db-38d070a23735)
 
 ## Troubleshooting:
 ### Path too long exception:
 If you encounter a path too long exception when building this example project, close Visual Studio and rename the repository to a shorter name before building the project.
 
 For a step-by-step procedure, refer to the [Tracking Annual Gold Price Fluctuations by Percentage Across Major Global Currencies blog]().
+
 
