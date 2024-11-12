@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+             xmlns:local="clr-namespace:GoldPriceRateDemo"
+             x:Class="GoldPriceRateDemo.MainPage"
+             Background="Black">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Border Stroke="#e8ebe0" 
+                StrokeThickness="4"
+                StrokeShape="{OnPlatform Default= RoundRectangle 40, Android= RoundRectangle 35}"
+                Margin="{OnPlatform Default=30, Android= 10}">
+
+            <chart:SfCartesianChart>
+
+                <chart:SfCartesianChart.Title>
+                    <Grid RowDefinitions="*,*" ColumnDefinitions="70,*">
+                        <Image Grid.Column="0" Grid.RowSpan="2" Source="goldicon.png"
+                                   HeightRequest="55"
+                                   WidthRequest="55"
+                                   Margin="15,5,0,0" />
+                        
+                            <Label Grid.Row="0" Grid.Column="1" Text="Tracking Annual Gold Price Fluctuations by Percentage Across Major Global Currencies"
+                                       TextColor="White"
+                                       HorizontalOptions="Start"
+                                       FontSize="18"
+                                       FontAttributes="Bold"
+                                       Margin="5,5,0,0"/>
+                        <HorizontalStackLayout  Grid.Row="1" Grid.Column="1" >
+                            <Label Text="Annual percentage changes in gold prices from 2009 to 2023, compared across major global currencies."
+                                       TextColor="White"
+                                       HorizontalOptions="Start"
+                                       FontSize="12"
+                                       Margin="5,5,0,0"/>
+
+                            <Label Text="Choose Currency" TextColor="White"
+                                   FontSize="14" Margin="{OnPlatform Default='180,0,5,0', Android='10,0,5,0', iOS='140,0,5,0'}"
+                                   VerticalOptions="Center"/>
+
+                            <editors:SfComboBox x:Name="comboBox" WidthRequest="{OnPlatform Default=200, Android=130, iOS=100}"
+                                                ItemsSource="{Binding CurrencyName}"
+                                                SelectedIndex="0"
+                                                SelectionChanged="SfComboBox_SelectionChanged"
+                                                Background="Black"
+                                                TextColor="White"
+                                                MaxDropDownHeight="150"
+                                                DropDownBackground="Black"
+                                                DropDownItemTextColor="White"
+                                                DropDownIconColor="White"
+                                                ClearButtonIconColor="Black"
+                                                Stroke="White">
+  
+                            </editors:SfComboBox>
+                        </HorizontalStackLayout>
+                    </Grid>
+                </chart:SfCartesianChart.Title>
+
+            <chart:SfCartesianChart.XAxes>
+                <chart:DateTimeAxis ShowMajorGridLines="False">
+                    <chart:DateTimeAxis.Title>
+                     <chart:ChartAxisTitle Text="Year" TextColor="White" />
+                    </chart:DateTimeAxis.Title>
+                        <chart:DateTimeAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle LabelFormat="yyyy"
+                                                       TextColor="White"/>
+                        </chart:DateTimeAxis.LabelStyle>
+                    </chart:DateTimeAxis>
+            </chart:SfCartesianChart.XAxes>
+
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis ShowMajorGridLines="False" Minimum="-40">
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="% Annual Exchange Rate" TextColor="White" />
+                        </chart:NumericalAxis.Title>
+                        <chart:NumericalAxis.LabelStyle>
+                            <chart:ChartAxisLabelStyle TextColor="White"/>
+                        </chart:NumericalAxis.LabelStyle>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+
+                <chart:SfCartesianChart.Annotations>
+                    <chart:HorizontalLineAnnotation Text="Highest Annual Growth" Y1="20" Stroke="White" StrokeDashArray="4,2,4">
+                        <chart:HorizontalLineAnnotation.LabelStyle>
+                            <chart:ChartAnnotationLabelStyle TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Start"/>
+                        </chart:HorizontalLineAnnotation.LabelStyle>
+                    </chart:HorizontalLineAnnotation>
+                    <chart:HorizontalLineAnnotation Text="Lowest Annual Growth" Y1="-25" Stroke="White" StrokeDashArray="4,2,4">
+                        <chart:HorizontalLineAnnotation.LabelStyle>
+                            <chart:ChartAnnotationLabelStyle TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="End"/>
+                        </chart:HorizontalLineAnnotation.LabelStyle>
+                    </chart:HorizontalLineAnnotation>
+                </chart:SfCartesianChart.Annotations>
+
+                <chart:SplineAreaSeries x:Name="series" ItemsSource="{Binding GoldPriceRate}"
+                                        XBindingPath="Year" 
+                                        YBindingPath="USD"
+                                        EnableTooltip="True"
+                                        ShowDataLabels="False"
+                                        Fill="#FAB12F"
+                                        Opacity="0.8">
+                </chart:SplineAreaSeries>
+
+        </chart:SfCartesianChart>
+       </Border>
+    </ContentPage.Content>
+   
+</ContentPage>
+
+
+
