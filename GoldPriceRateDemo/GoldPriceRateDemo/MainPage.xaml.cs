@@ -111,7 +111,7 @@ namespace GoldPriceRateDemo
                 if (rate > 0)
                     return "uparrow.png";
                 else
-                    return "downarrow3.png";
+                    return "downarrow.png";
             }
             return string.Empty;
         }
