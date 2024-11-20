@@ -1,6 +1,4 @@
-﻿
-
-namespace GoldPriceRateDemo
+﻿namespace GoldPriceRateDemo
 {
     public class Model
     {
@@ -14,7 +12,18 @@ namespace GoldPriceRateDemo
         public double GBP { get; set; }
         public double INR { get; set; }
         public double JPY { get; set; }
-
+        public Dictionary<string, double> CurrencyValues => new Dictionary<string, double>
+        {
+            { "USD", USD },
+            { "AUD", AUD },
+            { "CAD", CAD },
+            { "CHF", CHF },
+            { "CNY", CNY },
+            { "EUR", EUR },
+            { "GBP", GBP },
+            { "INR", INR },
+            { "JPY", JPY }
+        };
         public Model(DateTime year, double usd, double aud, double cad, double chf,double cny, double eur, double gbp, double inr, double jpy)
         {
             Year = year;

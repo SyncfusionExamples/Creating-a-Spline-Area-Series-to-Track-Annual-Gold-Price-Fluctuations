@@ -1,17 +1,16 @@
-﻿
-
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Reflection;
+
 
 namespace GoldPriceRateDemo
 {
     public class ViewModel
     {
         public ObservableCollection<Model> GoldPriceRate { get; set; }
-
         public string[] CurrencyName { get; set; }
         public string SelectedCurrency { get; set; }
         private DateTime year;
+
         public ViewModel()
         {
             GoldPriceRate = new ObservableCollection<Model>();

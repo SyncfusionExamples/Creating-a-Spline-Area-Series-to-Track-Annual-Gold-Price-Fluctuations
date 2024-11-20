@@ -16,6 +16,29 @@
                 Margin="{OnPlatform Default=30, Android= 10}">
 
             <chart:SfCartesianChart>
+                <chart:SfCartesianChart.Resources>
+                    <ResourceDictionary>
+                        <local:CurrencyConverter x:Key="currencyConverter"/>
+                        <DataTemplate x:Key="TooltipTemplate">
+                            <HorizontalStackLayout>
+                                <Path Data="{Binding Item,Converter= {StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}" 
+                                      Fill="{Binding Item,Converter= {StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}"
+                                      HorizontalOptions="Start" VerticalOptions="Center"
+                                      Scale="0.7" />
+                                <Label Text="Annual Growth:" TextColor="White" 
+                                       FontSize="12" 
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding Item, Converter={StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}"
+                                       TextColor="White"
+                                       FontSize="12"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center"
+                                       Margin="3,0,0,0"/>
+                        </HorizontalStackLayout>
+                    </DataTemplate>
+                    </ResourceDictionary>
+                </chart:SfCartesianChart.Resources>
 
                 <chart:SfCartesianChart.Title>
                     <Grid RowDefinitions="*,*" ColumnDefinitions="70,*">
@@ -44,8 +67,7 @@
 
                             <Picker x:Name="picker" WidthRequest="{OnPlatform Default=200, Android=130, iOS=100}"
                                                 ItemsSource="{Binding CurrencyName}"
-                                                SelectedItem="{Binding SelectedCurrency}"
-                                                SelectedIndexChanged="picker_SelectedIndexChanged"/>
+                                                SelectedItem="{Binding SelectedCurrency}"/>
                         </HorizontalStackLayout>
                     </Grid>
                 </chart:SfCartesianChart.Title>
@@ -86,25 +108,26 @@
                         </chart:HorizontalLineAnnotation.LabelStyle>
                     </chart:HorizontalLineAnnotation>
 
-                    <chart:ViewAnnotation X1="2021-03-01" Y1="23" CoordinateUnit="Axis">
+                    <chart:ViewAnnotation X1="2021-03-01" Y1="22.9" CoordinateUnit="Axis">
                         <chart:ViewAnnotation.View>
-                            <Image Source="uparrow.png" HeightRequest="28" WidthRequest="28" />
+                            <Image Source="uparrow.png" HeightRequest="30" WidthRequest="30" />
                         </chart:ViewAnnotation.View>
                     </chart:ViewAnnotation>
 
-                    <chart:ViewAnnotation X1="2021-03-08" Y1="-27" CoordinateUnit="Axis">
+                    <chart:ViewAnnotation X1="2021-03-08" Y1="-27.4" CoordinateUnit="Axis">
                         <chart:ViewAnnotation.View>
-                            <Image Source="downarrow.png" HeightRequest="28" WidthRequest="28"/>
+                            <Image Source="downarrow.png" HeightRequest="30" WidthRequest="30"/>
                         </chart:ViewAnnotation.View>
                     </chart:ViewAnnotation>
                 </chart:SfCartesianChart.Annotations>
 
                 <chart:SplineAreaSeries x:Name="series" ItemsSource="{Binding GoldPriceRate}"
                                         XBindingPath="Year" 
-                                        YBindingPath="USD"
+                                        YBindingPath="{Binding Source={x:Reference picker},Path=SelectedItem}"
                                         EnableTooltip="True"
                                         ShowDataLabels="False"
                                         Fill="#FAB12F"
+                                        TooltipTemplate="{StaticResource TooltipTemplate}"
                                         Opacity="0.9">
                 </chart:SplineAreaSeries>
 
