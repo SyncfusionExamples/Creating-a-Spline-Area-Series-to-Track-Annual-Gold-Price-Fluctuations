@@ -13,7 +13,8 @@ In today’s post, we’ll walk you through creating a visually compelling *Spli
 ## Picker Selection
 To make the chart more interactive, we’ve used the [Picker](https://learn.microsoft.com/en-us/dotnet/maui/user-interface/controls/picker?view=net-maui-8.0) to allow users to select different currencies. Based on the selected currency, the chart’s spline area series is dynamically updated to reflect the gold price fluctuations for that currency. This approach gives users flexibility, enabling them to explore the data for various currencies without needing to refresh the page or reload the chart.
 
-![gold rate](https://github.com/user-attachments/assets/47f9a632-b4c4-4f70-b2db-38d070a23735)
+![SplineAreaSeries](https://github.com/user-attachments/assets/6f52ed8e-af41-430e-aaa0-6683cc353b8d)
+
 
 ## Troubleshooting:
 ### Path too long exception:
