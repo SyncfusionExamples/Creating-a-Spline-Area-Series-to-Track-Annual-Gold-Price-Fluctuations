@@ -20,20 +20,23 @@
                     <ResourceDictionary>
                         <local:CurrencyConverter x:Key="currencyConverter"/>
                         <DataTemplate x:Key="TooltipTemplate">
-                            <HorizontalStackLayout>
+                            <HorizontalStackLayout HorizontalOptions="Start">
                                 <Path Data="{Binding Item,Converter= {StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}" 
                                       Fill="{Binding Item,Converter= {StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}"
-                                      HorizontalOptions="Start" VerticalOptions="Center"
-                                      Scale="0.7" />
+                                      HorizontalOptions="Start"
+                                      Scale="0.6"
+                                      TranslationX="-7"
+                                      Margin="0,0,0,0"/>
                                 <Label Text="Annual Growth:" TextColor="White" 
                                        FontSize="12" 
+                                       HorizontalOptions="Start"
                                        VerticalOptions="Center"
-                                       HorizontalOptions="Center"/>
+                                       Margin="-10,0,0,0"/>
                                 <Label Text="{Binding Item, Converter={StaticResource currencyConverter},ConverterParameter={Binding Source={x:Reference picker}}}"
                                        TextColor="White"
                                        FontSize="12"
                                        VerticalOptions="Center"
-                                       HorizontalOptions="Center"
+                                       HorizontalOptions="Start"
                                        Margin="3,0,0,0"/>
                         </HorizontalStackLayout>
                     </DataTemplate>
@@ -125,9 +128,8 @@
                                         XBindingPath="Year" 
                                         YBindingPath="{Binding Source={x:Reference picker},Path=SelectedItem}"
                                         EnableTooltip="True"
-                                        ShowDataLabels="False"
-                                        Fill="#FAB12F"
                                         TooltipTemplate="{StaticResource TooltipTemplate}"
+                                        Fill="#FAB12F"
                                         Opacity="0.9">
                 </chart:SplineAreaSeries>
 
