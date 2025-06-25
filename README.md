@@ -20,6 +20,6 @@ To make the chart more interactive, we’ve used the [Picker](https://learn.micr
 ### Path too long exception:
 If you encounter a path too long exception when building this example project, close Visual Studio and rename the repository to a shorter name before building the project.
 
-For a step-by-step procedure, refer to the [Tracking Annual Gold Price Fluctuations by Percentage Across Major Global Currencies blog]().
+For a step-by-step procedure, refer to the [Tracking Annual Gold Price Fluctuations by Percentage Across Major Global Currencies blog](https://www.syncfusion.com/blogs/post/maui-spline-area-chart-for-gold-rate/amp).
 
 
